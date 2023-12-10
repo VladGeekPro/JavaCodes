@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Basketball Knowledge Quiz</title>
+    <style>
+        /* Добавьте стили по желанию */
+    </style>
+</head>
+<body>
+
+<h1>Basketball Knowledge Quiz</h1>
+
+<form id="quizForm" action="/quiz" method="post">
+    <!-- Вопрос 1 -->
+    <p>1. Who is considered the greatest basketball player of all time?</p>
+    <input type="radio" name="question1" value="MJ"> Michael Jordan<br>
+    <input type="radio" name="question1" value="LB"> LeBron James<br>
+    <input type="radio" name="question1" value="KB"> Kobe Bryant<br>
+
+    <!-- Вопрос 2 -->
+    <p>2. Which team has won the most NBA championships?</p>
+    <input type="radio" name="question2" value="LAL"> Los Angeles Lakers<br>
+    <input type="radio" name="question2" value="BOS"> Boston Celtics<br>
+    <input type="radio" name="question2" value="CHI"> Chicago Bulls<br>
+
+    <!-- Скрытое поле для записи данных от map -->
+    <input type="hidden" id="mapData" name="mapData" value="">
+
+    <!-- Кнопка отправки формы -->
+    <input type="submit" value="Submit">
+</form>
+
+<!-- Скрипт JavaScript для управления выбором ответа и записи данных в скрытое поле -->
+<script>
+    document.getElementById('quizForm').addEventListener('submit', function (event) {
+        event.preventDefault();  // Предотвратить отправку формы
+
+        // Получите выбранные ответы
+        const selectedAnswers = [];
+        const questions = document.querySelectorAll('input[type="radio"]:checked');
+        questions.forEach((question) => {
+            selectedAnswers.push({
+                question: question.name,
+                answer: question.value
+            });
+        });
+
+        // Запишите данные в скрытое поле
+        document.getElementById('mapData').value = JSON.stringify(selectedAnswers);
+
+        // Отправьте форму
+        this.submit();
+    });
+</script>
+
+</body>
+</html>
